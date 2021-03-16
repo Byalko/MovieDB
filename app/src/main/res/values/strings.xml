@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">test_diplom</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_menu_home">Home</string>
+    <string name="nav_menu_catalog">Catalog</string>
+    <string name="nav_menu_search">Search</string>
+    <string name="nav_menu_profile">Profile</string>
+</resources>
