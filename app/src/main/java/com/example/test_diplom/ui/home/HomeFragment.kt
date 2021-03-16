@@ -1,12 +1,15 @@
 package com.example.test_diplom.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test_diplom.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.collect
@@ -19,13 +22,17 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
+    private lateinit var adapter : GenreAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        //viewModel.getGenres()
+
+        setupRecyclerView()
+
         return binding.root
     }
 
@@ -42,36 +49,42 @@ class HomeFragment : Fragment() {
             viewModel.genr.collect {
                 when (it) {
                     is GenreEvent.Success -> {
-                        val adapter = GenreAdapter()
-                        binding.genreList.adapter = adapter
-                        binding.genreList.layoutManager = LinearLayoutManager(activity)
                         adapter.differ.submitList(it.resultText.genres)
-                        //binding.progress.visibility = View.GONE
+                        adapter.setOnItemClickListener {
+                            Log.i("adapter","click $it")
+                        }
                         binding.swipe.isRefreshing = false
                     }
                     is GenreEvent.Failure -> {
                         with(binding) {
-                            genreList.visibility = View.GONE
-                            //progress.visibility = View.GONE
                             errorImage.visibility = View.VISIBLE
                             errorTxt.visibility = View.VISIBLE
                             errorTxt.text = it.errorText
+                            errorTxt.setTextColor(Color.RED)
                             binding.swipe.isRefreshing = false
                         }
+                        adapter.differ.submitList(emptyList())
                     }
-                    is GenreEvent.Empty -> binding.genreList.visibility = View.GONE
+                    is GenreEvent.Empty -> { }
                     is GenreEvent.Loading -> {
-                        //binding.progress.visibility = View.VISIBLE
-                        binding.swipe.isRefreshing = true
-                        binding.errorImage.visibility = View.GONE
-                        binding.errorTxt.visibility = View.GONE
-                        binding.errorTxt.visibility = View.GONE
-
-                    }
+                        with(binding){
+                            swipe.isRefreshing = true
+                            errorImage.visibility = View.GONE
+                            errorTxt.visibility = View.GONE
+                            errorTxt.visibility = View.GONE
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun setupRecyclerView(){
+        adapter = GenreAdapter()
+        binding.genreList.adapter = adapter
+        binding.genreList.layoutManager = GridLayoutManager(activity,2)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

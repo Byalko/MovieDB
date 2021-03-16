@@ -21,7 +21,7 @@ class HomeViewModel @Inject constructor(
     val genr: StateFlow<GenreEvent> = _genr
 
     init {
-        //getGenres()
+        getGenres()
     }
 
     fun getGenres() {

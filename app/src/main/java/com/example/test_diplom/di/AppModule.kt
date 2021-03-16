@@ -1,6 +1,7 @@
 package com.example.test_diplom.di
 
 import com.example.test_diplom.data.ApiFilms
+import com.example.test_diplom.di.TmdbModule_ProvideInterceptorFactory.provideInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,10 +16,6 @@ private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Singleton
-    @Provides
-    fun provideInterceptor(): OkHttpClient = OkHttpClient.Builder().build()
 
     @Singleton
     @Provides

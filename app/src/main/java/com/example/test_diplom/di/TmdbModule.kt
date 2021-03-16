@@ -6,7 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -16,9 +18,17 @@ private const val BASE_URLL = "https://api.themoviedb.org/3/"
 @Module
 @InstallIn(SingletonComponent::class)
 object TmdbModule {
-    @Singleton
     @Provides
-    fun provideInterceptor(): OkHttpClient = OkHttpClient.Builder().build()
+    fun provideLoggingInterceptor() = HttpLoggingInterceptor().apply {
+        this.level = HttpLoggingInterceptor.Level.HEADERS
+        this.level = HttpLoggingInterceptor.Level.BODY
+    }
+
+
+    @Provides
+    fun provideInterceptor(): OkHttpClient = OkHttpClient.Builder().apply {
+        this.addInterceptor(provideLoggingInterceptor())
+    }.build()
 
     @Singleton
     @Provides

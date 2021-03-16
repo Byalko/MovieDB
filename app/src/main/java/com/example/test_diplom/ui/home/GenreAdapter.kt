@@ -1,7 +1,9 @@
 package com.example.test_diplom.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -36,8 +38,14 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         val genre = differ.currentList[position]
-        with(holder) {
+        holder.apply {
             binding.article.text = genre.name
+            itemView.setOnClickListener {
+                onItemClickListener?.let {
+                    it(genre)
+                }
+            }
+            }
         }
         /*holder.itemView.apply {
             val article: TextView = findViewById(R.id.article)
@@ -48,7 +56,6 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
                 }
             }
         }*/
-    }
 
     private var onItemClickListener: ((GenreX) -> Unit)? = null
 

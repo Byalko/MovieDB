@@ -2,7 +2,6 @@ package com.example.test_diplom
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.forEach
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.test_diplom.databinding.ActivityMainBinding

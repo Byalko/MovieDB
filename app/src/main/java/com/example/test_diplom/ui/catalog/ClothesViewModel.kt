@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.test_diplom.repository.FilmRepository
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,9 +19,6 @@ class ClothesViewModel @Inject constructor(
     private val _film = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
     val film: StateFlow<FilmEvent> = _film
 
-    private val _trailer = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
-    val trailer: StateFlow<FilmEvent> = _trailer
-
     init {
         getFilm("301")
     }
@@ -34,7 +31,7 @@ class ClothesViewModel @Inject constructor(
         }
         val id = id_string.toInt()
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(IO) {
             _film.value = FilmEvent.Loading
 
             when (val response = repository.getFilm(id)) {
