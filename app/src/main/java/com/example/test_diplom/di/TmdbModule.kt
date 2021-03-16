@@ -1,12 +1,10 @@
 package com.example.test_diplom.di
 
-import com.example.test_diplom.data.ApiFilms
 import com.example.test_diplom.data.ApiTMDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,7 +24,7 @@ object TmdbModule {
 
 
     @Provides
-    fun provideInterceptor(): OkHttpClient = OkHttpClient.Builder().apply {
+    fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
         this.addInterceptor(provideLoggingInterceptor())
     }.build()
 
@@ -35,7 +33,7 @@ object TmdbModule {
     fun provideApiTmdb(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URLL)
         .addConverterFactory(MoshiConverterFactory.create())
-        .client(provideInterceptor())
+        .client(provideHttpClient())
         .build()
 
     @Singleton
