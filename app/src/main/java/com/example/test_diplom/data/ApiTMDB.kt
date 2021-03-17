@@ -8,6 +8,8 @@ import retrofit2.http.Query
 
 interface ApiTMDB {
 
-    @GET("genre/movie/list?api_key=0693b17c06c6556d4d5186dfad80a064&language=ru-RU")
+    @GET("genre/movie/list?language=ru-RU")
     suspend fun getListGenres() : Response<Genre_list>
+
+    
 }

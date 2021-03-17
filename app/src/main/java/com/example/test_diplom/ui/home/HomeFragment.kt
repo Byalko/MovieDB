@@ -6,12 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.test_diplom.R
 import com.example.test_diplom.databinding.FragmentHomeBinding
+import com.google.android.youtube.player.internal.v
 import kotlinx.coroutines.flow.collect
 
 
@@ -52,6 +57,13 @@ class HomeFragment : Fragment() {
                         adapter.differ.submitList(it.resultText.genres)
                         adapter.setOnItemClickListener {
                             Log.i("adapter","click $it")
+                            val bundle = Bundle().apply{
+                                putParcelable("genreFromCatalog",it)
+                            }
+                            findNavController().navigate(
+                                R.id.action_homeFragment_to_detailFragment,
+                                bundle
+                            )
                         }
                         binding.swipe.isRefreshing = false
                     }
