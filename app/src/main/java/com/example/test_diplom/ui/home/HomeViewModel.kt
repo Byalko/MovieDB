@@ -1,27 +1,33 @@
 package com.example.test_diplom.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_diplom.data.model.genre.Genre_list
 import com.example.test_diplom.repository.CatalogRepository
+import com.example.test_diplom.repository.HomeRepository
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val catalogRepository: CatalogRepository
+    private val catalogRepository: CatalogRepository,
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
 
     private val _genr = MutableStateFlow<GenreEvent>(GenreEvent.Empty)
     val genr: StateFlow<GenreEvent> = _genr
 
     init {
-        getGenres()
+        //getGenres()
+        getPopular()
     }
 
     fun getGenres() {
@@ -42,6 +48,15 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun getPopular() {
+        viewModelScope.launch(IO){
+            val res = homeRepository.getListPopular()
+            withContext(Dispatchers.Main){
+                Log.i("res", "${res.data}")
+            }
+        }
     }
 
     /*viewModelScope.launch(Dispatchers.IO) {

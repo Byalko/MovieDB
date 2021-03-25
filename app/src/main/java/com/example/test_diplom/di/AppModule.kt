@@ -21,7 +21,7 @@ object AppModule {
     fun provideApiFilms(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
-        .client(provideHttpClient())
+        //.client(provideHttpClient())
         .build()
 
     @Singleton
