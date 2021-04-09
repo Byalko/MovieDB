@@ -4,7 +4,7 @@ package com.example.test_diplom.data.model.homeFragment.popular
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-data class Result(
+data class ItemHome(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")

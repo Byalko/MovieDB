@@ -6,17 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test_diplom.R
 import com.example.test_diplom.databinding.FragmentHomeBinding
-import com.google.android.youtube.player.internal.v
 import kotlinx.coroutines.flow.collect
 
 
@@ -27,7 +23,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
-    private lateinit var adapter : GenreAdapter
+    private lateinit var adapter : HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,40 +41,38 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.swipe.setOnRefreshListener {
-            viewModel.getGenres()
+            viewModel.getAll()
+            //viewModel.getGenres()
             //binding.swipe.isRefreshing = false
         }
 
         lifecycleScope.launchWhenStarted {
-
-            viewModel.genr.collect {
-                when (it) {
-                    is GenreEvent.Success -> {
-                        adapter.differ.submitList(it.resultText.genres)
+            viewModel.all.collect { all ->
+                when(all){
+                    is AllEvent.Success -> {
+                        adapter.differ.submitList(all.resultText)
+                        binding.swipe.isRefreshing = false
                         adapter.setOnItemClickListener {
-                            Log.i("adapter","click $it")
-                            val bundle = Bundle().apply{
+                            Log.i("adapter1", "click $it")
+                            /*val bundle = Bundle().apply{
                                 putParcelable("genreFromCatalog",it)
-                            }
+                            }*/
                             findNavController().navigate(
-                                R.id.action_homeFragment_to_detailFragment,
-                                bundle
+                                R.id.action_homeFragment_to_detailFragment
                             )
                         }
-                        binding.swipe.isRefreshing = false
                     }
-                    is GenreEvent.Failure -> {
+                    is AllEvent.Failure -> {
                         with(binding) {
                             errorImage.visibility = View.VISIBLE
                             errorTxt.visibility = View.VISIBLE
-                            errorTxt.text = it.errorText
+                            errorTxt.text = all.errorText
                             errorTxt.setTextColor(Color.RED)
                             binding.swipe.isRefreshing = false
                         }
                         adapter.differ.submitList(emptyList())
                     }
-                    is GenreEvent.Empty -> { }
-                    is GenreEvent.Loading -> {
+                    is AllEvent.Loading -> {
                         with(binding){
                             swipe.isRefreshing = true
                             errorImage.visibility = View.GONE
@@ -86,15 +80,16 @@ class HomeFragment : Fragment() {
                             errorTxt.visibility = View.GONE
                         }
                     }
+                    else -> {}
                 }
             }
         }
     }
 
     private fun setupRecyclerView(){
-        adapter = GenreAdapter()
+        adapter = HomeAdapter()
         binding.genreList.adapter = adapter
-        binding.genreList.layoutManager = GridLayoutManager(activity,2)
+        binding.genreList.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
     }
 
     override fun onDestroyView() {

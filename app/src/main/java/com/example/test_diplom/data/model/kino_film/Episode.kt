@@ -1,4 +1,4 @@
-package com.example.test_diplom.data.model
+package com.example.test_diplom.data.model.kino_film
 
 data class Episode(
     val episodeNumber: Int,

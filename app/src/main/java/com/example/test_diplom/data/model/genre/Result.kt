@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GenreX(
+data class Result(
     @Json(name = "id")
     val id: Int,
     @Json(name = "name")

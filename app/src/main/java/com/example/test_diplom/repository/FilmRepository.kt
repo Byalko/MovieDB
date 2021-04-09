@@ -1,7 +1,7 @@
 package com.example.test_diplom.repository
 
 import com.example.test_diplom.data.ApiFilms
-import com.example.test_diplom.data.model.Films
+import com.example.test_diplom.data.model.kino_film.Films
 import com.example.test_diplom.util.Resource
 import javax.inject.Inject
 

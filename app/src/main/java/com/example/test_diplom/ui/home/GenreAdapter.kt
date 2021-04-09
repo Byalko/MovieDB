@@ -1,13 +1,14 @@
 package com.example.test_diplom.ui.home
 
-import android.util.Log
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.test_diplom.data.model.genre.GenreX
+import com.example.test_diplom.R
+import com.example.test_diplom.data.model.homeFragment.popular.ItemHome
 import com.example.test_diplom.databinding.ListItemGenreBinding
 
 
@@ -15,12 +16,12 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     class GenreViewHolder(val binding: ListItemGenreBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<GenreX>() {
-        override fun areItemsTheSame(oldItem: GenreX, newItem: GenreX): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<ItemHome>() {
+        override fun areItemsTheSame(oldItem: ItemHome, newItem: ItemHome): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: GenreX, newItem: GenreX): Boolean {
+        override fun areContentsTheSame(oldItem: ItemHome, newItem: ItemHome): Boolean {
             return oldItem == newItem
         }
     }
@@ -37,29 +38,18 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
-        val genre = differ.currentList[position]
+        var mLastClickTime = 0L
+
+        val category = differ.currentList[position]
         holder.apply {
-            binding.article.text = genre.name
+            binding.article.text = category.title
             itemView.setOnClickListener {
-                onItemClickListener?.let {
-                    it(genre)
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return@setOnClickListener
                 }
-            }
+                mLastClickTime = SystemClock.elapsedRealtime()
+                it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
             }
         }
-        /*holder.itemView.apply {
-            val article: TextView = findViewById(R.id.article)
-            article.text = genre.name
-            setOnClickListener {
-                onItemClickListener?.let {
-                    it(genre)
-                }
-            }
-        }*/
-
-    private var onItemClickListener: ((GenreX) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (GenreX) -> Unit) {
-        onItemClickListener = listener
     }
 }

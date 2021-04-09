@@ -1,6 +1,6 @@
 package com.example.test_diplom.data
 
-import com.example.test_diplom.data.model.Films
+import com.example.test_diplom.data.model.kino_film.Films
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers

@@ -1,86 +1,72 @@
 package com.example.test_diplom.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test_diplom.data.model.genre.Genre_list
-import com.example.test_diplom.repository.CatalogRepository
+import com.example.test_diplom.data.model.homeFragment.ItemHome
 import com.example.test_diplom.repository.HomeRepository
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val catalogRepository: CatalogRepository,
     private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-    private val _genr = MutableStateFlow<GenreEvent>(GenreEvent.Empty)
-    val genr: StateFlow<GenreEvent> = _genr
+    private val _all = MutableStateFlow<AllEvent>(AllEvent.Empty)
+    val all: StateFlow<AllEvent> = _all
 
     init {
-        //getGenres()
-        getPopular()
+        getAll()
     }
 
-    fun getGenres() {
-
-        viewModelScope.launch(Dispatchers.IO) {
-            _genr.value = GenreEvent.Loading
-
-            when (val response = catalogRepository.getListGenre()) {
-                is Resource.Error -> _genr.value = GenreEvent.Failure(response.message!!)
-                is Resource.Success -> {
-                    val list = response.data
-                    if (list == null) {
-                        _genr.value = GenreEvent.Failure("No data")
-                    } else {
-                        _genr.value = GenreEvent.Success(list)
+    fun getAll() {
+        viewModelScope.launch {
+            _all.value = AllEvent.Loading
+            try {
+                val res: MutableList<ItemHome> = mutableListOf()
+                coroutineScope {
+                    val call1 = async(Dispatchers.IO) { homeRepository.getListPopular() }
+                    when (val response = call1.await()) {
+                        is Resource.Success -> {
+                            res.add(ItemHome("Popular", response.data!!))
+                            res.add(ItemHome("Popular", response.data))
+                        }
+                        else -> {
+                            _all.value = AllEvent.Failure(response.message.toString())
+                        }
                     }
+
+                    val call2 = async(Dispatchers.IO) { homeRepository.getListPopular() }
+                    when (val response = call2.await()) {
+                        is Resource.Success -> {
+                            res.add(ItemHome("Popular", response.data!!))
+                            res.add(ItemHome("Popular", response.data))
+                        }
+                        else -> {
+                            _all.value = AllEvent.Failure(response.message.toString())
+                        }
+                    }
+                    _all.value = AllEvent.Success(res)
+
                 }
-            }
-        }
-
-    }
-
-    fun getPopular() {
-        viewModelScope.launch(IO){
-            val res = homeRepository.getListPopular()
-            withContext(Dispatchers.Main){
-                Log.i("res", "${res.data}")
+            } catch (e: Exception) {
+                _all.value = AllEvent.Failure(e.message.toString())
             }
         }
     }
-
-    /*viewModelScope.launch(Dispatchers.IO) {
-        _film.value = Event.Loading
-
-        when (val response = repository.getFilm(id)) {
-            is Resource.Error -> _film.value = Event.Failure(response.message!!)
-            is Resource.Success -> {
-                val film = response.data?.data?.nameEn
-                if (film == null) {
-                    _film.value = Event.Failure("No name")
-                } else {
-                    _film.value = Event.Success(film)
-                }
-
-            }
-        }
-    }*/
 
 }
 
-sealed class GenreEvent {
-    class Success(val resultText: Genre_list) : GenreEvent()
-    class Failure(val errorText: String) : GenreEvent()
-    object Loading : GenreEvent()
-    object Empty : GenreEvent()
+sealed class AllEvent {
+    class Success(val resultText: List<ItemHome>) : AllEvent()
+    class Failure(val errorText: String) : AllEvent()
+    object Loading : AllEvent()
+    object Empty : AllEvent()
 }

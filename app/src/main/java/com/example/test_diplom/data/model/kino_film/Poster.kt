@@ -1,6 +1,6 @@
-package com.example.test_diplom.data.model
+package com.example.test_diplom.data.model.kino_film
 
-data class Backdrop(
+data class Poster(
     val height: Int,
     val language: String,
     val url: String,
