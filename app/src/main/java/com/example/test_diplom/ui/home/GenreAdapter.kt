@@ -3,6 +3,7 @@ package com.example.test_diplom.ui.home
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -48,7 +49,8 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
                     return@setOnClickListener
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
-                it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+                val bundle = bundleOf("id" to category.id)
+                it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment,bundle)
             }
         }
     }

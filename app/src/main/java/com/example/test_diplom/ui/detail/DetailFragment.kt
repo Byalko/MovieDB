@@ -12,7 +12,7 @@ import com.example.test_diplom.databinding.DetailFragmentBinding
 class DetailFragment : Fragment() {
 
     private val viewModel: DetailViewModel by activityViewModels()
-    //private val args : DetailFragmentArgs by navArgs()
+    private val args : DetailFragmentArgs by navArgs()
 
     private var _binding : DetailFragmentBinding? = null
     private val binding get() = _binding!!
@@ -27,9 +27,8 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.res.text = "Hi"
-        //Log.i("args",args.genreFromCatalog.name)
+        val id = args.id
+        binding.res.text = id.toString()
     }
 
     override fun onDestroy() {
