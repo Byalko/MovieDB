@@ -2,10 +2,12 @@ package com.example.test_diplom.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -52,13 +54,19 @@ class HomeFragment : Fragment() {
                     is AllEvent.Success -> {
                         adapter.differ.submitList(all.resultText)
                         binding.swipe.isRefreshing = false
+                        var mLastClickTime = 0L
                         adapter.setOnItemClickListener {
+                            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                                return@setOnItemClickListener
+                            }
+                            mLastClickTime = SystemClock.elapsedRealtime()
+                            val bundle = bundleOf("id" to 200)
                             Log.i("adapter1", "click $it")
                             /*val bundle = Bundle().apply{
                                 putParcelable("genreFromCatalog",it)
                             }*/
                             findNavController().navigate(
-                                R.id.action_homeFragment_to_detailFragment
+                                R.id.action_homeFragment_to_detailFragment,bundle
                             )
                         }
                     }

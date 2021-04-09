@@ -45,7 +45,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
                 LinearLayoutManager(binding.listFilm.context, LinearLayoutManager.HORIZONTAL, false)
             adapter.differ.submitList(category.content.results)
 
-            itemView.setOnClickListener {
+            binding.more.setOnClickListener {
                 onItemClickListener?.let {
                     it(category)
                 }
