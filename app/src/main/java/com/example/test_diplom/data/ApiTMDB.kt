@@ -12,5 +12,11 @@ interface ApiTMDB {
 
     @GET("movie/popular")
     suspend fun getListPopular() : Response<PopularList>
+
+    @GET("movie/top_rated")
+    suspend fun getListTopRated() : Response<PopularList>
+
+    @GET("movie/upcoming")
+    suspend fun getListUpcoming() : Response<PopularList>
     
 }
