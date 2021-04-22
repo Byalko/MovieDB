@@ -45,9 +45,9 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         var mLastClickTime = 0L
 
-        val category = differ.currentList[position]
+        val film = differ.currentList[position]
         holder.apply {
-            val uri = category.poster_path
+            val uri = film.poster_path
             binding.poster.load(defaultUrl + uri) {
                 crossfade(true)
                 //placeholder(R.drawable.ic_placeholder)
@@ -58,7 +58,7 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
                     return@setOnClickListener
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
-                val bundle = bundleOf("id" to category.id)
+                val bundle = bundleOf("id" to film.id)
                 it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
             }
         }

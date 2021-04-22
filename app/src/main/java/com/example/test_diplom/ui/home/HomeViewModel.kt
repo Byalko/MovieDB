@@ -68,7 +68,7 @@ class HomeViewModel @Inject constructor(
 }
 
 sealed class AllEvent {
-    class Success(val resultText: List<ItemHome>) : AllEvent()
+    class Success(val result: List<ItemHome>) : AllEvent()
     class Failure(val errorText: String) : AllEvent()
     object Loading : AllEvent()
     object Empty : AllEvent()
