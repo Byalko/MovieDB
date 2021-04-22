@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.test_diplom.R
-import com.example.test_diplom.data.model.homeFragment.popular.ItemHome
+import com.example.test_diplom.data.model.homeFragment.popular.ItemFilm
 import com.example.test_diplom.databinding.ListItemFilmBinding
 
 
@@ -21,12 +21,12 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     private val defaultUrl = "https://image.tmdb.org/t/p/w200"
 
-    private val differCallback = object : DiffUtil.ItemCallback<ItemHome>() {
-        override fun areItemsTheSame(oldItem: ItemHome, newItem: ItemHome): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<ItemFilm>() {
+        override fun areItemsTheSame(oldItem: ItemFilm, newItem: ItemFilm): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ItemHome, newItem: ItemHome): Boolean {
+        override fun areContentsTheSame(oldItem: ItemFilm, newItem: ItemFilm): Boolean {
             return oldItem == newItem
         }
     }

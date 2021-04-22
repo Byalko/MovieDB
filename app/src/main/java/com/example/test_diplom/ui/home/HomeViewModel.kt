@@ -3,12 +3,11 @@ package com.example.test_diplom.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_diplom.data.model.homeFragment.ItemHome
-import com.example.test_diplom.data.model.homeFragment.popular.PopularList
+import com.example.test_diplom.data.model.homeFragment.popular.ListFilm
 import com.example.test_diplom.repository.HomeRepository
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.NonCancellable.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -51,7 +50,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private suspend fun checkRightState(
-        call: Deferred<Resource<PopularList>>,
+        call: Deferred<Resource<ListFilm>>,
         res: MutableList<ItemHome>,
         title: String
     ) {

@@ -1,7 +1,7 @@
 package com.example.test_diplom.data
 
 import com.example.test_diplom.data.model.genre.Genre_list
-import com.example.test_diplom.data.model.homeFragment.popular.PopularList
+import com.example.test_diplom.data.model.homeFragment.popular.ListFilm
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -11,12 +11,12 @@ interface ApiTMDB {
     suspend fun getListGenres() : Response<Genre_list>
 
     @GET("movie/popular")
-    suspend fun getListPopular() : Response<PopularList>
+    suspend fun getListPopular() : Response<ListFilm>
 
     @GET("movie/top_rated")
-    suspend fun getListTopRated() : Response<PopularList>
+    suspend fun getListTopRated() : Response<ListFilm>
 
     @GET("movie/upcoming")
-    suspend fun getListUpcoming() : Response<PopularList>
+    suspend fun getListUpcoming() : Response<ListFilm>
     
 }
