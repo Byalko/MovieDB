@@ -2,7 +2,6 @@ package com.example.test_diplom.data.model.homeFragment.popular
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 data class ItemHome(
     @Json(name = "adult")
@@ -21,8 +20,7 @@ data class ItemHome(
     val overview: String,
     @Json(name = "popularity")
     val popularity: Double,
-    @Json(name = "poster_path")
-    val posterPath: String,
+    val poster_path: String,
     @Json(name = "release_date")
     val releaseDate: String,
     @Json(name = "title")

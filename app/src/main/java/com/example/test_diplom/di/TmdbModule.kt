@@ -35,7 +35,8 @@ object TmdbModule {
         val request = chain.request().newBuilder()
         val originalHttpUrl = chain.request().url
         val newUrl = originalHttpUrl.newBuilder().addQueryParameter(
-            "api_key" , "0693b17c06c6556d4d5186dfad80a064").build()
+            "api_key", "0693b17c06c6556d4d5186dfad80a064"
+        ).build()
         request.url(newUrl)
         return chain.proceed(request.build())
     }

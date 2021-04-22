@@ -66,5 +66,5 @@
         app:layout_constraintEnd_toEndOf="@+id/margin_end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"
-        tools:listitem="@layout/list_item_genre" />
+        tools:listitem="@layout/list_item_film" />
 </androidx.constraintlayout.widget.ConstraintLayout>

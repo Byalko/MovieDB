@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
             viewModel.all.collect { all ->
                 when(all){
                     is AllEvent.Success -> {
+                        Log.i("Result",all.resultText[0].name)
                         adapter.differ.submitList(all.resultText)
                         binding.swipe.isRefreshing = false
                         var mLastClickTime = 0L

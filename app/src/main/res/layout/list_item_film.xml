@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_marginStart="8dp"
     android:layout_marginBottom="8dp">
@@ -11,18 +10,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="110dp"
         android:layout_height="180dp"
-        app:cardBackgroundColor="@color/purple_200"
         app:cardElevation="8dp"
         app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/article"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Moview"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:layout_gravity="center"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -16,7 +16,7 @@ class HomeRepository @Inject constructor(
 
     suspend fun getListTopRated(): Resource<PopularList> = checkHttpResponse(api.getListTopRated())
 
-    private fun <T> checkHttpResponse(response: Response<T>): Resource<T> {
+    private fun checkHttpResponse(response: Response<PopularList>): Resource<PopularList> {
         return try {
             val result = response.body()
             if (response.isSuccessful && result != null) {
