@@ -6,4 +6,6 @@
     <string name="nav_menu_catalog">Catalog</string>
     <string name="nav_menu_search">Search</string>
     <string name="nav_menu_profile">Profile</string>
+    <string name="image_banner">Banner</string>
+    <string name="image_poster">Poster</string>
 </resources>

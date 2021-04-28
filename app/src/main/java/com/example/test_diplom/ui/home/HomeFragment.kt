@@ -52,7 +52,6 @@ class HomeFragment : Fragment() {
             viewModel.all.collect { all ->
                 when(all){
                     is AllEvent.Success -> {
-                        Log.i("Result",all.result[0].name)
                         adapter.differ.submitList(all.result)
                         binding.swipe.isRefreshing = false
                         var mLastClickTime = 0L
@@ -61,11 +60,9 @@ class HomeFragment : Fragment() {
                                 return@setOnItemClickListener
                             }
                             mLastClickTime = SystemClock.elapsedRealtime()
+
                             val bundle = bundleOf("id" to 200)
-                            Log.i("adapter1", "click $it")
-                            /*val bundle = Bundle().apply{
-                                putParcelable("genreFromCatalog",it)
-                            }*/
+
                             findNavController().navigate(
                                 R.id.action_homeFragment_to_detailFragment,bundle
                             )
