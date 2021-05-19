@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_diplom.data.model.homeFragment.detail.DetailFilm
 import com.example.test_diplom.repository.HomeRepository
-import com.example.test_diplom.ui.home.AllEvent
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -20,9 +19,9 @@ class DetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _film = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
-    val film:StateFlow<FilmEvent> = _film
+    val film: StateFlow<FilmEvent> = _film
 
-    fun getFilm(id:Int?){
+    fun getFilm(id: Int?) {
         if (id == null) {
             _film.value = FilmEvent.Failure("Incorrect id_film")
             return
@@ -31,8 +30,8 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             _film.value = FilmEvent.Loading
 
-            withContext(IO){
-                when(val response = homeRepository.getDetailFilm(id)){
+            withContext(IO) {
+                when (val response = homeRepository.getDetailFilm(id)) {
                     is Resource.Success -> _film.value = FilmEvent.Success(response.data!!)
                     else -> _film.value = FilmEvent.Failure(response.message.toString())
                 }
