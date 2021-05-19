@@ -3,7 +3,6 @@ package com.example.test_diplom.ui.home
 import android.graphics.Color
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test_diplom.R
 import com.example.test_diplom.databinding.FragmentHomeBinding
+import com.example.test_diplom.ui.home.adapter.HomeAdapter
 import kotlinx.coroutines.flow.collect
 
 
@@ -44,8 +44,6 @@ class HomeFragment : Fragment() {
 
         binding.swipe.setOnRefreshListener {
             viewModel.getAll()
-            //viewModel.getGenres()
-            //binding.swipe.isRefreshing = false
         }
 
         lifecycleScope.launchWhenStarted {

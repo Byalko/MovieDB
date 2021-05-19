@@ -1,4 +1,4 @@
-package com.example.test_diplom.ui.home
+package com.example.test_diplom.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,7 +39,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         val category = differ.currentList[position]
         holder.apply {
             binding.textView.text = category.name
-            val adapter = GenreAdapter()
+            val adapter = ItemAdapter()
             binding.listFilm.adapter = adapter
             binding.listFilm.layoutManager =
                 LinearLayoutManager(binding.listFilm.context, LinearLayoutManager.HORIZONTAL, false)

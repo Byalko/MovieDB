@@ -19,7 +19,7 @@ class CatalogFragment : Fragment() {
     private var _binding: FragmentCatalogBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ClothesViewModel by activityViewModels()
+    private val viewModel: CatalogViewModel by activityViewModels()
 
     private var videoId: String = "www"
 
@@ -37,7 +37,7 @@ class CatalogFragment : Fragment() {
 
         binding.button2.setOnClickListener {
             //viewModel.getFilm(binding.idFilm.text.toString())
-            viewModel.getFilm("301")
+            //viewModel.getFilm("301")
             /*if (videoId.isNotEmpty()){
                 val intent = Intent(this, YouTubeActivity::class.java).apply {
                     putExtra(EXTRA_MESSAGE, videoId)

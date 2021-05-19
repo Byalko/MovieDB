@@ -1,29 +1,23 @@
 package com.example.test_diplom.ui.catalog
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.test_diplom.repository.FilmRepository
-import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ClothesViewModel @Inject constructor(
-    private val repository: FilmRepository
+class CatalogViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _film = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
     val film: StateFlow<FilmEvent> = _film
 
     init {
-        getFilm("301")
+        //getFilm("301")
     }
 
-    fun getFilm(id_string: String?) {
+    /*fun getFilm(id_string: String?) {
 
         if (id_string.isNullOrEmpty()) {
             _film.value = FilmEvent.Failure("Valid id")
@@ -47,7 +41,7 @@ class ClothesViewModel @Inject constructor(
                 }
             }
         }
-    }
+    }*/
 }
 
 sealed class FilmEvent {

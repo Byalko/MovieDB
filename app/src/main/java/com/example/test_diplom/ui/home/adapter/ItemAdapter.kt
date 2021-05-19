@@ -1,4 +1,4 @@
-package com.example.test_diplom.ui.home
+package com.example.test_diplom.ui.home.adapter
 
 import android.os.SystemClock
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import com.example.test_diplom.data.model.homeFragment.popular.ItemFilm
 import com.example.test_diplom.databinding.ListItemFilmBinding
 
 
-class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
+class ItemAdapter : RecyclerView.Adapter<ItemAdapter.GenreViewHolder>() {
 
     class GenreViewHolder(val binding: ListItemFilmBinding) : RecyclerView.ViewHolder(binding.root)
 

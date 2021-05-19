@@ -22,9 +22,6 @@ class DetailViewModel @Inject constructor(
     private val _film = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
     val film:StateFlow<FilmEvent> = _film
 
-    init {
-    }
-
     fun getFilm(id:Int?){
         if (id == null) {
             _film.value = FilmEvent.Failure("Incorrect id_film")

@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.test_diplom.databinding.FragmentProfileBinding
-import com.example.test_diplom.ui.catalog.ClothesViewModel
+import com.example.test_diplom.ui.catalog.CatalogViewModel
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ClothesViewModel by activityViewModels()
+    private val viewModel: CatalogViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

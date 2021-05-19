@@ -1,6 +1,7 @@
 package com.example.test_diplom.di
 
 import com.example.test_diplom.data.ApiTMDB
+import com.example.test_diplom.util.Constans
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,8 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-private const val BASE_URLL = "https://api.themoviedb.org/3/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object TmdbModule {
@@ -26,8 +25,8 @@ object TmdbModule {
 
 
     @Provides
-    fun provideHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(provideLoggingInterceptor())
+    fun provideHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient = OkHttpClient.Builder().apply {
+        addInterceptor(interceptor)
         addInterceptor { chain -> return@addInterceptor addApiKeyToRequests(chain) }
     }.build()
 
@@ -43,13 +42,13 @@ object TmdbModule {
 
     @Singleton
     @Provides
-    fun provideApiTmdb(): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URLL)
+    fun provideApiTmdb(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl(Constans.BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
-        .client(provideHttpClient())
+        .client(okHttpClient)
         .build()
 
     @Singleton
     @Provides
-    fun clientApiFilms(): ApiTMDB = provideApiTmdb().create(ApiTMDB::class.java)
+    fun clientApiFilms(retrofit: Retrofit): ApiTMDB = retrofit.create(ApiTMDB::class.java)
 }
