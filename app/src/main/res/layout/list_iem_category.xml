@@ -9,14 +9,15 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top Rating"
+        tools:text="Top Rating"
         android:textSize="20sp"
+        app:layout_constrainedWidth="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintStart_toStartOf="@+id/margin_start"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/view_more"
-        android:clickable="true"
         android:background="@drawable/selector_view_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +28,9 @@
 
         <TextView
             android:id="@+id/text"
-            android:text="More"
+            android:text="@string/more_films"
             android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
         android:id="@+id/list_film"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/margin_end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"

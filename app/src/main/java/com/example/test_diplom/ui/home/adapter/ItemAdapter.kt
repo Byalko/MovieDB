@@ -15,7 +15,7 @@ import com.example.test_diplom.data.model.homeFragment.popular.ItemFilm
 import com.example.test_diplom.databinding.ListItemFilmBinding
 
 
-class ItemAdapter : RecyclerView.Adapter<ItemAdapter.GenreViewHolder>() {
+class ItemAdapter(val destination: String?) : RecyclerView.Adapter<ItemAdapter.GenreViewHolder>() {
 
     class GenreViewHolder(val binding: ListItemFilmBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -58,8 +58,18 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.GenreViewHolder>() {
                     return@setOnClickListener
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
-                val bundle = bundleOf("id" to film.id)
-                it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+                destination?.let { dest->
+                    val bundle = bundleOf("id" to film.id)
+                    when(dest){
+                        "home" -> {
+                            it.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+                        }
+                        "detail" -> {
+                            it.findNavController().navigate(R.id.action_detailFragment_self, bundle)
+                        }
+                    }
+                }
+
             }
         }
     }

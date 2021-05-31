@@ -39,7 +39,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         val category = differ.currentList[position]
         holder.apply {
             binding.textView.text = category.name
-            val adapter = ItemAdapter()
+            val adapter : ItemAdapter = if (category.destination.isNullOrEmpty()){
+                ItemAdapter(null)
+            } else {
+                ItemAdapter(category.destination)
+            }
             binding.listFilm.adapter = adapter
             binding.listFilm.layoutManager =
                 LinearLayoutManager(binding.listFilm.context, LinearLayoutManager.HORIZONTAL, false)

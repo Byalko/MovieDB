@@ -23,4 +23,11 @@ interface ApiTMDB {
 
     @GET("movie/{movie_id}")
     suspend fun getDetailFilm(@Path("movie_id")id : Int) : Response<DetailFilm>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilarFilm(@Path("movie_id")id : Int) : Response<ListFilm>
+
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendationFilm(@Path("movie_id")id : Int) : Response<ListFilm>
+
 }

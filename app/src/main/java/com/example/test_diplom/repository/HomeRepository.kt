@@ -11,6 +11,10 @@ class HomeRepository @Inject constructor(
     private val api: ApiTMDB
 ) {
 
+    suspend fun getRecommendationFilm(id:Int) : Resource<ListFilm> = checkHttpResponse(api.getRecommendationFilm(id))
+
+    suspend fun getSimilarFilm(id:Int) : Resource<ListFilm> = checkHttpResponse(api.getSimilarFilm(id))
+
     suspend fun getDetailFilm(id:Int): Resource<DetailFilm> = checkHttpResponse(api.getDetailFilm(id))
 
     suspend fun getListUpcoming(): Resource<ListFilm> = checkHttpResponse(api.getListUpcoming())

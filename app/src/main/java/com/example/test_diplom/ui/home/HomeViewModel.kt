@@ -29,16 +29,16 @@ class HomeViewModel @Inject constructor(
             _all.value = AllEvent.Loading
             try {
                 val res: MutableList<ItemHome> = mutableListOf()
-
+                val destination = "home"
                 coroutineScope {
                     val call1 = async(Dispatchers.IO) { homeRepository.getListPopular() }
-                    checkRightState(call1, res, "Popular")
+                    checkRightState(call1, res, "Popular",destination)
 
                     val call2 = async(Dispatchers.IO) { homeRepository.getListTopRated() }
-                    checkRightState(call2, res, "TopRated")
+                    checkRightState(call2, res, "TopRated",destination)
 
                     val call3 = async(Dispatchers.IO) { homeRepository.getListUpcoming() }
-                    checkRightState(call3, res, "Upcoming")
+                    checkRightState(call3, res, "Upcoming",destination)
 
                     _all.value = AllEvent.Success(res)
 
@@ -52,11 +52,12 @@ class HomeViewModel @Inject constructor(
     private suspend fun checkRightState(
         call: Deferred<Resource<ListFilm>>,
         res: MutableList<ItemHome>,
-        title: String
+        title: String,
+        destination: String
     ) {
         when (val response = call.await()) {
             is Resource.Success -> {
-                res.add(ItemHome(title, response.data!!))
+                res.add(ItemHome(title, response.data!!,destination))
             }
             else -> {
                 _all.value = AllEvent.Failure(response.message.toString())

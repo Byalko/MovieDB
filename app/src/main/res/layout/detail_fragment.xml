@@ -39,9 +39,22 @@
             app:layout_constraintGuide_end="16dp"
             />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+            android:background="@drawable/ripple_effect"
+            app:iconPadding="0dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="20dp"
+            app:icon="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="@id/banner"
+            app:layout_constraintStart_toStartOf="@id/banner"/>
+
         <ImageView
             android:id="@+id/banner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
@@ -55,13 +68,12 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             tools:text="Hunter"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintEnd_toStartOf="@id/poster"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/banner"
             app:layout_constraintVertical_bias="0"
@@ -71,10 +83,9 @@
         <ImageView
             android:id="@+id/poster"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toTopOf="@+id/title"
@@ -83,76 +94,67 @@
 
         <TextView
             android:id="@+id/vote_average_label"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Vote average:"
+            android:text="@string/vote_average"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintWidth_default="wrap"
             />
 
         <TextView
             android:id="@+id/vote_count_label"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Vote count:"
+            android:text="@string/vote_count"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/vote_average_label"
-            app:layout_constraintWidth_default="wrap"
             />
 
         <TextView
             android:id="@+id/release_date_label"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Release date:"
+            android:text="@string/release_date"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/vote_count_label"
-            app:layout_constraintWidth_default="wrap"
             />
 
         <TextView
             android:id="@+id/vote_average"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             tools:text="Sergei Belko"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@id/poster"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/vote_average_label"
             app:layout_constraintTop_toTopOf="@id/vote_average_label"
-            app:layout_constrainedWidth="true"
             app:layout_goneMarginEnd="0dp"
             />
 
         <TextView
             android:id="@+id/vote_count"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             tools:text="Sergei Belko"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@id/poster"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/vote_count_label"
             app:layout_constraintTop_toTopOf="@id/vote_count_label"
@@ -163,13 +165,12 @@
         <TextView
             android:id="@+id/release_date"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             tools:text="Sergei Belko"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@id/poster"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/release_date_label"
             app:layout_constraintTop_toTopOf="@id/release_date_label"
@@ -196,71 +197,60 @@
             app:layout_constraintTop_toBottomOf="@+id/title_poster_bottom_barrier"
             />
 
-        <TextView
-            android:id="@+id/actors_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Similar Movies"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/short_descriptions"
-            app:layout_constraintWidth_default="wrap"
-            />
-
-        <!--<androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/actions"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            app:constraint_referenced_ids="like,watch,share"
-            app:flow_horizontalBias="0"
-            app:flow_horizontalGap="8dp"
-            app:flow_horizontalStyle="packed"
-            app:flow_verticalStyle="packed"
-            app:flow_wrapMode="chain"
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/actors_label"
-            app:layout_constraintWidth_default="wrap"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:src="@drawable/ic_error"/>
 
-        <Button
-            android:id="@+id/like"
+        <TextView
+            android:id="@+id/error_txt"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/error_image"
+            app:layout_constraintEnd_toEndOf="@id/error_image"
+            app:layout_constraintStart_toStartOf="@id/error_image"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="like"
-            app:layout_goneMarginEnd="0dp"
-            />
+            android:text="Retry"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/error_txt"
+            app:layout_constraintStart_toStartOf="@id/error_txt"
+            app:layout_constraintEnd_toEndOf="@id/error_txt"/>
 
-        <Button
-            android:id="@+id/watch"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genre_list"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="watch"
-            app:layout_goneMarginEnd="0dp"
-            app:layout_goneMarginStart="0dp"
-            />
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/short_descriptions"
+            tools:listitem="@layout/list_iem_category" />
 
-        <Button
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
+        <!--<androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/similar_list"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="share"
-            app:layout_goneMarginStart="0dp"
-            />-->
+            android:layout_marginStart="5dp"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/similar_label"
+            tools:listitem="@layout/list_item_film" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
