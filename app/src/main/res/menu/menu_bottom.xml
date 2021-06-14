@@ -4,9 +4,6 @@
     <item android:id="@+id/homeFragment"
         android:icon="@drawable/ic_bottom_nav_home"
         android:title="@string/nav_menu_home"/>
-    <item android:id="@+id/catalogFragment"
-        android:icon="@drawable/ic_bottom_nav_dashboard"
-        android:title="@string/nav_menu_catalog"/>
     <item android:id="@+id/searchFragment"
         android:icon="@drawable/ic_bottom_nav_search"
         android:title="@string/nav_menu_search"/>

@@ -14,8 +14,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.test_diplom.R
+import com.example.test_diplom.data.model.db.toDetailFilmDB
 import com.example.test_diplom.databinding.DetailFragmentBinding
 import com.example.test_diplom.ui.home.adapter.HomeAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 
 class DetailFragment : Fragment() {
@@ -87,6 +89,11 @@ class DetailFragment : Fragment() {
                         binding.releaseDate.text = film.result.release_date
                         binding.shortDescriptions.text = film.result.overview
                         binding.progress.visibility = View.GONE
+
+                        binding.btnLike.setOnClickListener {
+                            viewModel.saveMovie(film.result.toDetailFilmDB())
+                            Snackbar.make(view,"Film save successfully", Snackbar.LENGTH_SHORT).show()
+                        }
 
                         with(binding) {
                             title.visibility = View.VISIBLE

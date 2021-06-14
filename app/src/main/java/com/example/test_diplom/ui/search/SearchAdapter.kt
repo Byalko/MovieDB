@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.test_diplom.data.model.db.DetailFilmDB
 import com.example.test_diplom.data.model.homeFragment.popular.ItemFilm
 import com.example.test_diplom.data.model.searchFragment.SearchItem
 import com.example.test_diplom.databinding.ItemFilmPreviewBinding
@@ -16,12 +17,12 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ArticleViewHolder>() {
     class ArticleViewHolder(val binding: ItemFilmPreviewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<SearchItem>() {
-        override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<DetailFilmDB>() {
+        override fun areItemsTheSame(oldItem: DetailFilmDB, newItem: DetailFilmDB): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean {
+        override fun areContentsTheSame(oldItem: DetailFilmDB, newItem: DetailFilmDB): Boolean {
             return oldItem == newItem
         }
     }
@@ -42,7 +43,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ArticleViewHolder>() {
         val film = differ.currentList[position]
         holder.apply {
             with(binding) {
-                filmImage.load(DEFAULT_IMAGE_URL + film.poster_path)
+                film.poster_path?.let {
+                    filmImage.load(DEFAULT_IMAGE_URL + film.poster_path)
+                }
                 voteAverage.text = film.vote_average.toString()
                 voteCount.text = film.vote_count.toString()
                 title.text = film.title

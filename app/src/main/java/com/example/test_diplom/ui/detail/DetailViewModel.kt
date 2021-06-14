@@ -4,24 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.test_diplom.data.model.db.DetailFilmDB
 import com.example.test_diplom.data.model.homeFragment.ItemHome
 import com.example.test_diplom.data.model.homeFragment.detail.DetailFilm
 import com.example.test_diplom.data.model.homeFragment.popular.ListFilm
+import com.example.test_diplom.repository.DatabaseRepository
 import com.example.test_diplom.repository.HomeRepository
 import com.example.test_diplom.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val homeRepository: HomeRepository,
+    private val databaseRepository:DatabaseRepository
 ) : ViewModel() {
 
     private val _film = MutableStateFlow<FilmEvent>(FilmEvent.Empty)
@@ -51,6 +51,14 @@ class DetailViewModel @Inject constructor(
                 multiplyCategory(id)
             } catch (e: Exception) {
                 _film.value = FilmEvent.Failure(e.message.toString())
+            }
+        }
+    }
+
+    fun saveMovie(movie:DetailFilmDB){
+        viewModelScope.launch {
+            withContext(IO){
+                databaseRepository.insert(movie)
             }
         }
     }

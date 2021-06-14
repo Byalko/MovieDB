@@ -52,6 +52,19 @@
             app:layout_constraintTop_toTopOf="@id/banner"
             app:layout_constraintStart_toStartOf="@id/banner"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_like"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+            android:background="@drawable/ripple_effect"
+            app:iconPadding="0dp"
+            app:iconGravity="textStart"
+            android:layout_marginTop="20dp"
+            app:icon="@drawable/ic_favorite"
+            app:layout_constraintTop_toTopOf="@id/banner"
+            app:layout_constraintEnd_toEndOf="@id/banner"/>
+
         <ImageView
             android:id="@+id/banner"
             android:layout_width="match_parent"

@@ -15,11 +15,6 @@
             app:launchSingleTop="true" />
     </fragment>
     <fragment
-        android:id="@+id/catalogFragment"
-        android:name="com.example.test_diplom.ui.catalog.CatalogFragment"
-        android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog" />
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.test_diplom.ui.search.SearchFragment"
         android:label="fragment_search"
@@ -28,11 +23,6 @@
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.test_diplom.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.test_diplom.ui.detail.DetailFragment"
@@ -46,6 +36,15 @@
             app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.test_diplom.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

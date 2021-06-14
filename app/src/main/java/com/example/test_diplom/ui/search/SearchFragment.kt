@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test_diplom.R
+import com.example.test_diplom.data.model.searchFragment.toDetailFilmDB
 import com.example.test_diplom.databinding.FragmentSearchBinding
 import com.example.test_diplom.util.Resource
 import kotlinx.coroutines.Job
@@ -74,8 +75,8 @@ class SearchFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    it.data?.let {
-                        searchAdapter.differ.submitList(it.results)
+                    it.data?.let { movieList ->
+                        searchAdapter.differ.submitList(movieList.results.map { it.toDetailFilmDB() }.filter { it.poster_path!="null" })
                     }
                 }
                 is Resource.Loading -> {
