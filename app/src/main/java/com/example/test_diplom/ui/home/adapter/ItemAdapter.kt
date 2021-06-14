@@ -13,13 +13,12 @@ import coil.transform.RoundedCornersTransformation
 import com.example.test_diplom.R
 import com.example.test_diplom.data.model.homeFragment.popular.ItemFilm
 import com.example.test_diplom.databinding.ListItemFilmBinding
+import com.example.test_diplom.util.Constans.Companion.DEFAULT_IMAGE_URL
 
 
 class ItemAdapter(val destination: String?) : RecyclerView.Adapter<ItemAdapter.GenreViewHolder>() {
 
     class GenreViewHolder(val binding: ListItemFilmBinding) : RecyclerView.ViewHolder(binding.root)
-
-    private val defaultUrl = "https://image.tmdb.org/t/p/w200"
 
     private val differCallback = object : DiffUtil.ItemCallback<ItemFilm>() {
         override fun areItemsTheSame(oldItem: ItemFilm, newItem: ItemFilm): Boolean {
@@ -48,7 +47,7 @@ class ItemAdapter(val destination: String?) : RecyclerView.Adapter<ItemAdapter.G
         val film = differ.currentList[position]
         holder.apply {
             val uri = film.poster_path
-            binding.poster.load(defaultUrl + uri) {
+            binding.poster.load(DEFAULT_IMAGE_URL + uri) {
                 crossfade(true)
                 //placeholder(R.drawable.ic_placeholder)
                 transformations(RoundedCornersTransformation())
