@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val movie = searchAdapter.differ.currentList[position]
                 viewModel.deleteMovie(movie)
-                Snackbar.make(view,"Article delete successfully", Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(view,"Movie delete successfully", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo"){
                         viewModel.saveMovie(movie)
                     }
@@ -85,11 +85,13 @@ class ProfileFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner,{
             if (it.isNotEmpty()){
                 searchAdapter.differ.submitList(it)
+                binding.itemFilm.visibility = View.VISIBLE
                 binding.message.visibility = View.GONE
             } else {
                 binding.message.visibility = View.VISIBLE
                 binding.message.text = "No movies"
                 searchAdapter.differ.submitList(emptyList())
+                binding.itemFilm.visibility = View.INVISIBLE
             }
         })
     }

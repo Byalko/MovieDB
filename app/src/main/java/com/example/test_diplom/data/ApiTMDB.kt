@@ -11,13 +11,13 @@ import retrofit2.http.Query
 interface ApiTMDB {
 
     @GET("movie/popular")
-    suspend fun getListPopular(): Response<ListFilm>
+    suspend fun getListPopular(@Query("page") page: Int?): Response<ListFilm>
 
     @GET("movie/top_rated")
-    suspend fun getListTopRated(): Response<ListFilm>
+    suspend fun getListTopRated(@Query("page") page: Int?): Response<ListFilm>
 
     @GET("movie/upcoming")
-    suspend fun getListUpcoming(): Response<ListFilm>
+    suspend fun getListUpcoming(@Query("page") page: Int?): Response<ListFilm>
 
     @GET("movie/{movie_id}")
     suspend fun getDetailFilm(@Path("movie_id") id: Int): Response<DetailFilm>

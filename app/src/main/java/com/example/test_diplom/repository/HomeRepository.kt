@@ -5,7 +5,6 @@ import com.example.test_diplom.data.model.homeFragment.detail.DetailFilm
 import com.example.test_diplom.data.model.homeFragment.popular.ListFilm
 import com.example.test_diplom.util.Resource
 import com.example.test_diplom.util.checkHttpResponse
-import retrofit2.Response
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
@@ -18,9 +17,9 @@ class HomeRepository @Inject constructor(
 
     suspend fun getDetailFilm(id:Int): Resource<DetailFilm> = checkHttpResponse(api.getDetailFilm(id))
 
-    suspend fun getListUpcoming(): Resource<ListFilm> = checkHttpResponse(api.getListUpcoming())
+    suspend fun getListUpcoming(page: Int?): Resource<ListFilm> = checkHttpResponse(api.getListUpcoming(page))
 
-    suspend fun getListPopular(): Resource<ListFilm> = checkHttpResponse(api.getListPopular())
+    suspend fun getListPopular(page: Int?): Resource<ListFilm> = checkHttpResponse(api.getListPopular(page))
 
-    suspend fun getListTopRated(): Resource<ListFilm> = checkHttpResponse(api.getListTopRated())
+    suspend fun getListTopRated(page: Int?): Resource<ListFilm> = checkHttpResponse(api.getListTopRated(page))
 }

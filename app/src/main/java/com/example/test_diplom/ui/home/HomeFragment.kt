@@ -3,6 +3,7 @@ package com.example.test_diplom.ui.home
 import android.graphics.Color
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,18 +54,20 @@ class HomeFragment : Fragment() {
                         adapter.differ.submitList(all.result)
                         binding.swipe.isRefreshing = false
                         var mLastClickTime = 0L
-                        adapter.setOnItemClickListener {
+                        /*adapter.setOnItemClickListener {
                             if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                                 return@setOnItemClickListener
                             }
                             mLastClickTime = SystemClock.elapsedRealtime()
 
-                            val bundle = bundleOf("id" to 200)
+                            //val bundle = bundleOf("id" to 200)
+                            Log.i("PAG","blyat2")
 
                             findNavController().navigate(
-                                R.id.action_homeFragment_to_detailFragment,bundle
+                                R.id.action_homeFragment_to_pagingFragment
                             )
-                        }
+                            Log.i("PAG","blyat3")
+                        }*/
                     }
                     is AllEvent.Failure -> {
                         with(binding) {

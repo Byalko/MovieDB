@@ -31,13 +31,13 @@ class HomeViewModel @Inject constructor(
                 val res: MutableList<ItemHome> = mutableListOf()
                 val destination = "home"
                 coroutineScope {
-                    val call1 = async(Dispatchers.IO) { homeRepository.getListPopular() }
+                    val call1 = async(Dispatchers.IO) { homeRepository.getListPopular(null) }
                     checkRightState(call1, res, "Popular",destination)
 
-                    val call2 = async(Dispatchers.IO) { homeRepository.getListTopRated() }
+                    val call2 = async(Dispatchers.IO) { homeRepository.getListTopRated(null) }
                     checkRightState(call2, res, "TopRated",destination)
 
-                    val call3 = async(Dispatchers.IO) { homeRepository.getListUpcoming() }
+                    val call3 = async(Dispatchers.IO) { homeRepository.getListUpcoming(null) }
                     checkRightState(call3, res, "Upcoming",destination)
 
                     _all.value = AllEvent.Success(res)

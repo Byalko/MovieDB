@@ -92,7 +92,7 @@ class DetailFragment : Fragment() {
 
                         binding.btnLike.setOnClickListener {
                             viewModel.saveMovie(film.result.toDetailFilmDB())
-                            Snackbar.make(view,"Film save successfully", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(view,"Movie save successfully", Snackbar.LENGTH_SHORT).show()
                         }
 
                         with(binding) {

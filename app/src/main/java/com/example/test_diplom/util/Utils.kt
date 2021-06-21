@@ -43,6 +43,6 @@ fun <T> checkHttpResponse(response: Response<T>): Resource<T> {
             Resource.Error(response.message())
         }
     } catch (e: Exception) {
-        Resource.Error(e.message.toString())
+        Resource.ErrorException(e)
     }
 }
