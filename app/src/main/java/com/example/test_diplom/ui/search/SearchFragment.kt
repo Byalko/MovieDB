@@ -77,7 +77,8 @@ class SearchFragment : Fragment() {
                 is Resource.Success -> {
                     hideProgressBar()
                     it.data?.let { movieList ->
-                        searchAdapter.differ.submitList(movieList.results.map { it.toDetailFilmDB() }.filter { it.poster_path!="null" })
+                        searchAdapter.differ.submitList(movieList.results.
+                        map { it.toDetailFilmDB() }.filter { it.poster_path!="null" })
                     }
                 }
                 is Resource.Loading -> {

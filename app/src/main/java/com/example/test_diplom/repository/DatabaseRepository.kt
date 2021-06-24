@@ -16,5 +16,4 @@ class DatabaseRepository @Inject constructor(
     val movieFlow: Flow<List<DetailFilmDB>>
         get() = db.movieDao().getAll()
 
-    fun getSavedFilm() = db.movieDao().getAll()
 }
